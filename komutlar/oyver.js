@@ -11,12 +11,13 @@ exports.run = async (client, message, args) => {
  let delay = db.get(`delay_${message.guild.id}_${message.author.id}`)
  let data  = db.get(`vote_${message.guild.id}`) 
  let use   = db.get(`voteUSER_${message.author.id}_${message.guild.id}`)
- let date  = Date.now()
-
 // -------- \\ 
-
- let zaman = moment.duration(delay + 10800000 - date).format("[**] D [**Gün**] H [**Saat**] m [**Dakika**] s [**Saniye]")
+if(delay+10800000 > Date.now()){
+ let zaman = moment.duration(delay + 10800000 - Date.now()).format("[**] D [**Gün**] H [**Saat**] m [**Dakika**] s [**Saniye]")
  if(delay) return message.channel.send("❌ Uyarı Bu kodu kullanmak için " + zaman + " beklemen gerekiyor.")
+} else {
+  db.delete(`delay_${message.guild.id}_${message.author.id}`)
+
 
 // -------- \\
 
@@ -89,7 +90,7 @@ if(collect.id == "doğru") {
 
       await db.add(`vote_${message.guild.id}`, 1)
       await db.add(`voteUSER_${message.author.id}_${message.guild.id}`, 1)
-      await db.set(`delay_${message.guild.id}_${message.author.id}`, date)
+      await db.set(`delay_${message.guild.id}_${message.author.id}`, Date.now())
 
 // -------- \\
 
@@ -140,7 +141,7 @@ collect.reply.defer();
      })
 
 // -------- \\
-
+}
 };
 exports.conf = {
   aliases: ["oy-ver"]
