@@ -1,6 +1,6 @@
 const ayarlar = {
-  TOKEN: "", // ASSAGIYI OKU
-  sahip: "BOTUNUZUN SAHİP ID",
+  TOKEN: "OTA2MTY1NzMzOTQyMjYzODY4.YYUqmg.d_kuJpVEHrx7bs4fLVyN9vLxEaY", // ASSAGIYI OKU
+  sahip: "",
   prefix: "!"
 };
 
